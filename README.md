@@ -3,9 +3,10 @@
 
 A LangGraph-orchestrated multi-agent system that autonomously detects manufacturing
 defects, diagnoses root causes, and models response scenarios for Nike's World Cup
-jersey supply chain crisis (April 2026).
+jersey supply chain challenges (April 2026).
 
 Built as a candidate concept project for the **Nike Lead Data Analyst** role.
+
 
 ---
 
@@ -32,6 +33,8 @@ Landing Zone (CSV/Excel)
 ```
 nike-wc-defect-analytics/
 ├── README.md
+├── Nike_AI_Analytics_UserStories_AC_v1
+├── Nike_AI_Analytics_UserStories_AC_v3
 ├── POC_CONSTRAINTS.md          ← 4 deliberate POC simplifications documented
 ├── DATA_SOURCES.md             ← Full synthetic data inventory
 ├── requirements.txt
@@ -82,6 +85,16 @@ nike-wc-defect-analytics/
 ```
 
 ## Quick Start
+
+### 0. Initial Prompts
+```bash
+Non-ai-assisted requirement creation:
+        Nike_AI_Analytics_UserStories_AC_v1
+
+Final ai-assisted requirements document that was used:
+        Nike_AI_Analytics_UserStories_AC_v3
+
+```
 
 ### 1. Generate Synthetic Data
 ```bash
