@@ -1,0 +1,20 @@
+# dbt connection profile for Databricks Community Edition
+# Place this file at ~/.dbt/profiles.yml on your local machine,
+# OR keep it here for reference (dbt looks in ~/.dbt/ by default).
+#
+# Install adapter: pip install dbt-spark[PyHive]
+
+nike_wc:
+  target: dev
+  outputs:
+    dev:
+      type: spark
+      method: thrift          # Databricks CE exposes a Thrift JDBC endpoint
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      port: 443
+      user: token
+      password: "{{ env_var('DATABRICKS_TOKEN') }}"
+      cluster: "{{ env_var('DATABRICKS_CLUSTER_ID') }}"
+      schema: silver          # default schema; overridden per model folder
+      connect_timeout: 60
+      connect_retries: 3

@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: defect_alerts
+    description: >
+      Output of Detection Agent (A-02). One row per batch inspection.
+      Contains Z-scores, alert status (FLAGGED/REVIEW/CLEAR/UNRESOLVED),
+      full reasoning chains, and lot corroboration flags.
+      Primary Tableau data source for the Defect Overview dashboard view.
+    columns:
+      - name: run_id
+        description: Orchestrator run that produced this alert
+        tests:
+          - not_null
+      - name: batch_id
+        description: Batch investigated
+        tests:
+          - not_null
+      - name: alert_status
+        tests:
+          - accepted_values:
+              values: ['FLAGGED', 'REVIEW', 'CLEAR', 'UNRESOLVED']
+      - name: anomaly_score
+        description: Z-score relative to supplier-specific baseline (AC-10)
+        tests:
+          - not_null
+      - name: pct_above_baseline
+        description: Percentage deviation above supplier historical mean
+
+  - name: rca_findings
+    description: >
+      Output of RCA Agent (A-03). One row per (run_id, batch_id) investigation.
+      Contains ranked hypotheses with confidence scores, evidence sources queried,
+      and data gaps that limited confidence. Drives executive briefing generation.
+    columns:
+      - name: rca_status
+        tests:
+          - accepted_values:
+              values: ['COMPLETE', 'ESCALATED', 'INSUFFICIENT_EVIDENCE']
+      - name: top_confidence
+        description: Confidence score [0,1] for leading hypothesis
+        tests:
+          - not_null
+      - name: confidence_tier
+        tests:
+          - accepted_values:
+              values: ['HIGH', 'MEDIUM', 'LOW']
+
+  - name: scenario_projections
+    description: >
+      Output of Scenario Agent (A-04). One row per scenario per run.
+      Monte Carlo P10/P50/P90 cost and timeline distributions for
+      do_nothing, partial_remediation, and full_recall strategies.
+      Pre-computed return_rate variants enable Tableau parameter actions (POC-3).
+    columns:
+      - name: scenario_name
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['do_nothing', 'partial_remediation', 'full_recall']
+      - name: confidence_flag
+        tests:
+          - accepted_values:
+              values: ['OK', 'LOW_CONFIDENCE']
+      - name: mean_total_cost_usd
+        tests:
+          - not_null
+
+  - name: executive_briefings
+    description: >
+      Output of Summary Agent (A-05). One row per run.
+      LLM-generated executive briefing with self-corrected fact-check audit
+      (AC-25). Unverified numeric claims are marked [⚠ UNVERIFIED] in the text.
+      Proactive trigger metadata explains why the briefing was generated (AC-24).
+    columns:
+      - name: briefing_id
+        tests:
+          - unique
+          - not_null
+      - name: all_claims_verified
+        description: TRUE if every numeric claim passed the ±5% tolerance check
+        tests:
+          - not_null
+      - name: recommended_scenario
+        tests:
+          - not_null
+
+  - name: escalation_queue
+    description: >
+      Human-in-the-loop queue written by all agents.
+      Analysts mark items resolved=TRUE via a Databricks SQL dashboard widget.
+      urgency and open_hours computed fields drive SLA tracking.
+    columns:
+      - name: escalation_id
+        tests:
+          - unique
+          - not_null
+      - name: agent_id
+        tests:
+          - accepted_values:
+              values: ['A-01', 'A-02', 'A-03', 'A-04', 'A-05']
+      - name: urgency
+        tests:
+          - accepted_values:
+              values: ['HIGH', 'MEDIUM', 'LOW']
+
+  - name: run_log
+    description: >
+      Orchestrator run summary. Tracks agent invocation sequence, tool call counts,
+      routing decisions, and overall pipeline outcome.
+      Used for "smart skip" auditing (AC-05) and demo traceability (AC-04).
+    columns:
+      - name: run_id
+        tests:
+          - unique
+          - not_null
+      - name: pipeline_state
+        tests:
+          - accepted_values:
+              values: ['COMPLETE', 'PARTIAL', 'FAILED']

@@ -1,0 +1,1634 @@
+[
+  {
+    "date": "2026-03-01",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1502,
+    "sentiment_score": 0.714,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-01",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1771,
+    "sentiment_score": 0.64,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-01",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1213,
+    "sentiment_score": 0.847,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-01",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1114,
+    "sentiment_score": 0.71,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-02",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1192,
+    "sentiment_score": 0.563,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-02",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2257,
+    "sentiment_score": 0.675,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-02",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2355,
+    "sentiment_score": 0.626,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-02",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1947,
+    "sentiment_score": 0.806,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-03",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1549,
+    "sentiment_score": 0.843,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-03",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2269,
+    "sentiment_score": 0.685,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-03",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1693,
+    "sentiment_score": 0.585,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-03",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1658,
+    "sentiment_score": 0.57,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-04",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1831,
+    "sentiment_score": 0.707,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-04",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1141,
+    "sentiment_score": 0.787,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-04",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2226,
+    "sentiment_score": 0.73,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-04",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1393,
+    "sentiment_score": 0.84,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-05",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1959,
+    "sentiment_score": 0.564,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-05",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2220,
+    "sentiment_score": 0.568,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-05",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2468,
+    "sentiment_score": 0.607,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-05",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2202,
+    "sentiment_score": 0.669,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-06",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1851,
+    "sentiment_score": 0.71,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-06",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1138,
+    "sentiment_score": 0.841,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-06",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1843,
+    "sentiment_score": 0.681,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-06",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2396,
+    "sentiment_score": 0.665,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-07",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2043,
+    "sentiment_score": 0.667,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-07",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1176,
+    "sentiment_score": 0.631,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-07",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1971,
+    "sentiment_score": 0.551,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-07",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2226,
+    "sentiment_score": 0.615,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-08",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2419,
+    "sentiment_score": 0.553,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-08",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1831,
+    "sentiment_score": 0.704,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-08",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1875,
+    "sentiment_score": 0.762,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-08",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1251,
+    "sentiment_score": 0.628,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-09",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1349,
+    "sentiment_score": 0.639,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-09",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1150,
+    "sentiment_score": 0.716,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-09",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1892,
+    "sentiment_score": 0.617,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-09",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 880,
+    "sentiment_score": 0.621,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-10",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1368,
+    "sentiment_score": 0.742,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-10",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1353,
+    "sentiment_score": 0.828,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-10",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 905,
+    "sentiment_score": 0.812,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-10",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1309,
+    "sentiment_score": 0.743,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-11",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1230,
+    "sentiment_score": 0.847,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-11",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 802,
+    "sentiment_score": 0.71,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-11",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2095,
+    "sentiment_score": 0.745,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-11",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1555,
+    "sentiment_score": 0.732,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-12",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2244,
+    "sentiment_score": 0.647,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-12",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1340,
+    "sentiment_score": 0.815,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-12",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1636,
+    "sentiment_score": 0.767,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-12",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1403,
+    "sentiment_score": 0.82,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-13",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 917,
+    "sentiment_score": 0.647,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-13",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 821,
+    "sentiment_score": 0.738,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-13",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1249,
+    "sentiment_score": 0.797,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-13",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1372,
+    "sentiment_score": 0.769,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-14",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 832,
+    "sentiment_score": 0.603,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-14",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2393,
+    "sentiment_score": 0.711,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-14",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1994,
+    "sentiment_score": 0.832,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-14",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2327,
+    "sentiment_score": 0.582,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-15",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2139,
+    "sentiment_score": 0.756,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-15",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2082,
+    "sentiment_score": 0.627,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-15",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1928,
+    "sentiment_score": 0.74,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-15",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1705,
+    "sentiment_score": 0.612,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-16",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1350,
+    "sentiment_score": 0.616,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-16",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2089,
+    "sentiment_score": 0.611,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-16",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2341,
+    "sentiment_score": 0.792,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-16",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1713,
+    "sentiment_score": 0.669,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-17",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2287,
+    "sentiment_score": 0.62,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-17",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1103,
+    "sentiment_score": 0.68,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-17",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 991,
+    "sentiment_score": 0.821,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-17",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1740,
+    "sentiment_score": 0.699,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-18",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1160,
+    "sentiment_score": 0.606,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-18",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1804,
+    "sentiment_score": 0.607,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-18",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1169,
+    "sentiment_score": 0.833,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-18",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 843,
+    "sentiment_score": 0.744,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-19",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1163,
+    "sentiment_score": 0.643,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-19",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2207,
+    "sentiment_score": 0.795,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-19",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 942,
+    "sentiment_score": 0.732,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-19",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1673,
+    "sentiment_score": 0.593,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-20",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2121,
+    "sentiment_score": 0.624,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-20",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1005,
+    "sentiment_score": 0.841,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-20",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1081,
+    "sentiment_score": 0.767,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-20",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2454,
+    "sentiment_score": 0.768,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-21",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1004,
+    "sentiment_score": 0.554,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-21",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 842,
+    "sentiment_score": 0.663,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-21",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 827,
+    "sentiment_score": 0.583,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-21",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2119,
+    "sentiment_score": 0.779,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-22",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1070,
+    "sentiment_score": 0.83,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-22",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 971,
+    "sentiment_score": 0.625,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-22",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2084,
+    "sentiment_score": 0.63,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-22",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2422,
+    "sentiment_score": 0.73,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-23",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2421,
+    "sentiment_score": 0.84,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-23",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2307,
+    "sentiment_score": 0.582,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-23",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2248,
+    "sentiment_score": 0.795,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-23",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1085,
+    "sentiment_score": 0.575,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-24",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1952,
+    "sentiment_score": 0.694,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-24",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2470,
+    "sentiment_score": 0.818,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-24",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1479,
+    "sentiment_score": 0.599,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-24",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1299,
+    "sentiment_score": 0.694,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-25",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2217,
+    "sentiment_score": 0.567,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-25",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1913,
+    "sentiment_score": 0.63,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-25",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2489,
+    "sentiment_score": 0.587,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-25",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1915,
+    "sentiment_score": 0.563,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-26",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1847,
+    "sentiment_score": 0.639,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-26",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1650,
+    "sentiment_score": 0.816,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-26",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1259,
+    "sentiment_score": 0.593,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-26",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1674,
+    "sentiment_score": 0.557,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-27",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1523,
+    "sentiment_score": 0.666,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-27",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1262,
+    "sentiment_score": 0.747,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-27",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2201,
+    "sentiment_score": 0.827,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-27",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2264,
+    "sentiment_score": 0.665,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-28",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1030,
+    "sentiment_score": 0.797,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-28",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1025,
+    "sentiment_score": 0.698,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-28",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1377,
+    "sentiment_score": 0.617,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-28",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2060,
+    "sentiment_score": 0.657,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-29",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1538,
+    "sentiment_score": 0.65,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-29",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 973,
+    "sentiment_score": 0.827,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-29",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2038,
+    "sentiment_score": 0.819,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-29",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1677,
+    "sentiment_score": 0.595,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-30",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2028,
+    "sentiment_score": 0.709,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-30",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1670,
+    "sentiment_score": 0.604,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-30",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2166,
+    "sentiment_score": 0.595,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-30",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2079,
+    "sentiment_score": 0.756,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-31",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1513,
+    "sentiment_score": 0.795,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-31",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1355,
+    "sentiment_score": 0.813,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-31",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2155,
+    "sentiment_score": 0.825,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-03-31",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1343,
+    "sentiment_score": 0.661,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-01",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2256,
+    "sentiment_score": 0.793,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-01",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2415,
+    "sentiment_score": 0.79,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-01",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1104,
+    "sentiment_score": 0.551,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-01",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1100,
+    "sentiment_score": 0.783,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-02",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1599,
+    "sentiment_score": 0.646,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-02",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2431,
+    "sentiment_score": 0.684,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-02",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1779,
+    "sentiment_score": 0.786,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-02",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1031,
+    "sentiment_score": 0.794,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-03",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2288,
+    "sentiment_score": 0.723,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-03",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 985,
+    "sentiment_score": 0.634,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-03",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1061,
+    "sentiment_score": 0.647,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-03",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1588,
+    "sentiment_score": 0.605,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-04",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1812,
+    "sentiment_score": 0.656,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-04",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2220,
+    "sentiment_score": 0.677,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-04",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2032,
+    "sentiment_score": 0.842,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-04",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1482,
+    "sentiment_score": 0.788,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-05",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2139,
+    "sentiment_score": 0.591,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-05",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1584,
+    "sentiment_score": 0.826,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-05",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1818,
+    "sentiment_score": 0.676,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-05",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1808,
+    "sentiment_score": 0.712,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-06",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2482,
+    "sentiment_score": 0.71,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-06",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 971,
+    "sentiment_score": 0.619,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-06",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 1663,
+    "sentiment_score": 0.724,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-06",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2390,
+    "sentiment_score": 0.708,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-07",
+    "platform": "twitter_x",
+    "topic": "world_cup_jersey_hype",
+    "volume": 2332,
+    "sentiment_score": 0.758,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-07",
+    "platform": "reddit",
+    "topic": "world_cup_jersey_hype",
+    "volume": 978,
+    "sentiment_score": 0.616,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-07",
+    "platform": "instagram",
+    "topic": "world_cup_jersey_hype",
+    "volume": 805,
+    "sentiment_score": 0.621,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-07",
+    "platform": "news_media",
+    "topic": "world_cup_jersey_hype",
+    "volume": 835,
+    "sentiment_score": 0.611,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-08",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 23529,
+    "sentiment_score": 0.122,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-08",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 11609,
+    "sentiment_score": 0.242,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-08",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 19447,
+    "sentiment_score": 0.062,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-08",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 12566,
+    "sentiment_score": 0.122,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-09",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 12723,
+    "sentiment_score": 0.109,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-09",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 21797,
+    "sentiment_score": 0.217,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-09",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 15359,
+    "sentiment_score": 0.098,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-09",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 12515,
+    "sentiment_score": 0.061,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-10",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 12688,
+    "sentiment_score": 0.073,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-10",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 8863,
+    "sentiment_score": 0.125,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-10",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 21916,
+    "sentiment_score": 0.189,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-10",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 11473,
+    "sentiment_score": 0.124,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-11",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 10417,
+    "sentiment_score": 0.183,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-11",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 13183,
+    "sentiment_score": 0.145,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-11",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 19968,
+    "sentiment_score": 0.056,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-11",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 16029,
+    "sentiment_score": 0.078,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-12",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 8662,
+    "sentiment_score": 0.165,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-12",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 7411,
+    "sentiment_score": 0.316,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-12",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 5494,
+    "sentiment_score": 0.18,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-12",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 5147,
+    "sentiment_score": 0.244,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-13",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 9722,
+    "sentiment_score": 0.3,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-13",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 7851,
+    "sentiment_score": 0.34,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-13",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 6763,
+    "sentiment_score": 0.232,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-13",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 9282,
+    "sentiment_score": 0.239,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-14",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 6349,
+    "sentiment_score": 0.289,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-14",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 4491,
+    "sentiment_score": 0.172,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-14",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 4263,
+    "sentiment_score": 0.326,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-14",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 5421,
+    "sentiment_score": 0.271,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-15",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 4089,
+    "sentiment_score": 0.251,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-15",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 7470,
+    "sentiment_score": 0.229,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-15",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 11175,
+    "sentiment_score": 0.286,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-15",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 9827,
+    "sentiment_score": 0.241,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-16",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 11529,
+    "sentiment_score": 0.316,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-16",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 6507,
+    "sentiment_score": 0.264,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-16",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 7470,
+    "sentiment_score": 0.292,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-16",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 6226,
+    "sentiment_score": 0.336,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-17",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 8272,
+    "sentiment_score": 0.345,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-17",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 11791,
+    "sentiment_score": 0.226,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-17",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 5735,
+    "sentiment_score": 0.175,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-17",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 4458,
+    "sentiment_score": 0.23,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-18",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_defect",
+    "volume": 5504,
+    "sentiment_score": 0.194,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-18",
+    "platform": "reddit",
+    "topic": "nike_jersey_defect",
+    "volume": 11995,
+    "sentiment_score": 0.315,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-18",
+    "platform": "instagram",
+    "topic": "nike_jersey_defect",
+    "volume": 10895,
+    "sentiment_score": 0.262,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-18",
+    "platform": "news_media",
+    "topic": "nike_jersey_defect",
+    "volume": 9672,
+    "sentiment_score": 0.165,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-19",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_recall_response",
+    "volume": 2782,
+    "sentiment_score": 0.367,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-19",
+    "platform": "reddit",
+    "topic": "nike_jersey_recall_response",
+    "volume": 3159,
+    "sentiment_score": 0.413,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-19",
+    "platform": "instagram",
+    "topic": "nike_jersey_recall_response",
+    "volume": 2175,
+    "sentiment_score": 0.457,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-19",
+    "platform": "news_media",
+    "topic": "nike_jersey_recall_response",
+    "volume": 3021,
+    "sentiment_score": 0.264,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-20",
+    "platform": "twitter_x",
+    "topic": "nike_jersey_recall_response",
+    "volume": 2297,
+    "sentiment_score": 0.412,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-20",
+    "platform": "reddit",
+    "topic": "nike_jersey_recall_response",
+    "volume": 1927,
+    "sentiment_score": 0.317,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-20",
+    "platform": "instagram",
+    "topic": "nike_jersey_recall_response",
+    "volume": 3970,
+    "sentiment_score": 0.269,
+    "mentions_nike_jersey": true
+  },
+  {
+    "date": "2026-04-20",
+    "platform": "news_media",
+    "topic": "nike_jersey_recall_response",
+    "volume": 2874,
+    "sentiment_score": 0.445,
+    "mentions_nike_jersey": true
+  }
+]

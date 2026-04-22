@@ -1,0 +1,9 @@
+supplier_id,supplier_name,region,material_type,contract_tier,baseline_defect_rate
+S001,Viet Textile Partners,Vietnam,jersey_fabric,tier1,0.008
+S002,Mekong Apparel Co.,Vietnam,bonded_seam_tape,tier1,0.011
+S003,Jakarta Sportswear Ltd.,Indonesia,jersey_fabric,tier2,0.014
+S004,Bandung Heat-Transfer,Indonesia,heat_transfer_film,tier2,0.009
+S005,Dhaka Precision Fabric,Bangladesh,jersey_fabric,tier1,0.007
+S006,Chittagong Seam Works,Bangladesh,bonded_seam_tape,tier2,0.013
+S007,Surabaya Bonding Tech,Indonesia,bonded_seam_tape,tier2,0.021
+S008,Ho Chi Minh Film Coat,Vietnam,heat_transfer_film,tier2,0.019

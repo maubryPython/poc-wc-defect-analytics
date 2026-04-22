@@ -1,0 +1,135 @@
+version: 2
+
+models:
+  - name: dim_supplier
+    description: >
+      One row per supplier. Sourced from supplier_manifest.csv ingested by A-01.
+      Used by Detection Agent (baseline_lookup) and Scenario Agent (unit pricing).
+    columns:
+      - name: supplier_id
+        description: Primary key — uppercase supplier code (e.g. S001)
+        tests:
+          - unique
+          - not_null
+      - name: tier
+        description: Supplier tier classification
+        tests:
+          - accepted_values:
+              values: ['TIER_1', 'TIER_2', 'TIER_3']
+      - name: avg_defect_rate
+        description: Historical average defect rate from supplier manifest
+        tests:
+          - not_null
+      - name: is_active
+        description: TRUE if supplier status is active
+        tests:
+          - not_null
+
+  - name: dim_batch
+    description: >
+      One row per manufacturing batch. Sourced from manufacturing_batches.csv.
+      NOTE: is_defective ground-truth label is stripped by A-01 ingestion and
+      never appears here. line_id is used by Detection Agent for baseline lookup.
+    columns:
+      - name: batch_id
+        description: Primary key — unique batch identifier
+        tests:
+          - unique
+          - not_null
+      - name: supplier_id
+        description: Foreign key to dim_supplier
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_supplier')
+              field: supplier_id
+      - name: line_id
+        description: Production line identifier (L1–L4)
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['L1', 'L2', 'L3', 'L4']
+      - name: unit_count
+        description: Number of units produced in this batch
+        tests:
+          - not_null
+
+  - name: fact_qc_inspections
+    description: >
+      One row per QC inspection. Sourced from qc_inspection_logs.xlsx.
+      Computes defect_rate and dominant_defect_type used by Detection and RCA agents.
+    columns:
+      - name: inspection_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: batch_id
+        description: Foreign key to dim_batch
+        tests:
+          - not_null
+      - name: defect_rate
+        description: total_defects / units_inspected — core Detection Agent input
+        tests:
+          - not_null
+      - name: dominant_defect_type
+        description: Defect category with highest count — used for RCA source routing (AC-15)
+        tests:
+          - accepted_values:
+              values: ['stitching', 'colorfastness', 'sizing', 'material', 'print']
+      - name: qc_result
+        description: Overall inspection result
+        tests:
+          - accepted_values:
+              values: ['PASS', 'FAIL', 'CONDITIONAL']
+
+  - name: fact_sales_returns
+    description: >
+      One row per return transaction. Sourced from sales_returns.csv.
+      Used by Scenario Agent (A-04) for return rate and cost modeling.
+    columns:
+      - name: return_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: return_rate
+        description: units_returned / units_sold for this transaction
+        tests:
+          - not_null
+      - name: gross_return_cost_usd
+        description: units_returned × unit_price_usd
+        tests:
+          - not_null
+
+  - name: supplier_defect_history
+    description: >
+      Monthly defect rate history per supplier per line.
+      Used by Detection Agent's baseline_lookup tool (AC-10) to
+      compute supplier-specific Z-scores. Includes trailing 3-month
+      smoothed average to reduce noise from single-month spikes.
+    columns:
+      - name: supplier_id
+        description: Part of composite primary key
+        tests:
+          - not_null
+      - name: line_id
+        description: Part of composite primary key
+        tests:
+          - not_null
+      - name: month
+        description: Part of composite primary key (first day of month)
+        tests:
+          - not_null
+      - name: avg_defect_rate
+        description: Monthly average defect rate for this supplier/line
+        tests:
+          - not_null
+      - name: std_defect_rate
+        description: Monthly std dev of defect rate — used in Z-score denominator
+        tests:
+          - not_null
+      - name: trailing_3m_avg_rate
+        description: Rolling 3-month average — smoothed baseline for anomaly detection
+        tests:
+          - not_null

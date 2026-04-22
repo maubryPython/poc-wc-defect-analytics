@@ -1,0 +1,32 @@
+name: nike_wc_defect_analytics
+version: "1.0.0"
+config-version: 2
+
+profile: nike_wc
+
+# Paths
+model-paths:   ["models"]
+macro-paths:   ["macros"]
+test-paths:    ["tests"]
+target-path:   "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  nike_wc_defect_analytics:
+    silver:
+      +materialized: table
+      +schema: silver
+    gold:
+      +materialized: table
+      +schema: gold
+
+vars:
+  # Date window for "current" World Cup batch window
+  wc_start_date: "2026-01-01"
+  wc_end_date:   "2026-06-30"
+
+  # Anomaly thresholds (mirrors agent_config.yaml — single source of truth is YAML;
+  # these vars allow dbt tests to enforce the same boundaries)
+  flag_threshold:      2.0   # Z-score above which a batch is FLAGGED
+  borderline_low:      1.5   # Z-score lower bound for REVIEW status
+  rca_confidence_min:  0.70  # Minimum confidence to mark RCA COMPLETE
