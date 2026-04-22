@@ -453,3 +453,112 @@ def scenario_summary_query(run_id: str) -> dict:
         }
     except Exception as e:
         return {"status": "error", "tool": "scenario_summary_query", "message": str(e)}
+
+
+# ─── Prevention Story Query Tools ─────────────────────────────────────────────
+# Powers the four dashboard charts that make the "never again" case.
+
+def supplier_risk_score_query(supplier_id: str = None, risk_tier: str = None) -> dict:
+    """
+    Tool: supplier_risk_score_query
+    Retrieve pre-production supplier risk scores from silver.supplier_risk_scores.
+    Used by Detection Agent to enrich defect context and by export notebook for Chart 2.
+    Optionally filter by supplier_id or risk_tier (HIGH / ELEVATED / NORMAL).
+    """
+    try:
+        df = _spark().table("silver.supplier_risk_scores")
+        if supplier_id:
+            df = df.filter(F.col("supplier_id") == supplier_id)
+        if risk_tier:
+            df = df.filter(F.col("risk_tier") == risk_tier)
+        rows = df.orderBy("composite_risk_score").toPandas().to_dict("records")
+        return {
+            "status": "ok", "tool": "supplier_risk_score_query",
+            "scores": rows, "count": len(rows),
+            "high_risk_suppliers": [r["supplier_id"] for r in rows if r["risk_tier"] == "HIGH"],
+        }
+    except Exception as e:
+        return {"status": "error", "tool": "supplier_risk_score_query", "message": str(e), "scores": []}
+
+
+def lot_traceability_query(lot_id: str = None, supplier_id: str = None,
+                           defective_only: bool = False) -> dict:
+    """
+    Tool: lot_traceability_query
+    Retrieve material lot traceability data from gold.lot_defect_traceability.
+    Used by RCA Agent to link batches → lots → root cause, and by export for Chart 3.
+    """
+    try:
+        df = _spark().table("gold.lot_defect_traceability")
+        if lot_id:
+            df = df.filter(F.col("lot_id") == lot_id)
+        if supplier_id:
+            df = df.filter(F.col("supplier_id") == supplier_id)
+        if defective_only:
+            df = df.filter(F.col("is_defective") == True)
+        rows = df.orderBy(F.col("mean_defect_rate").desc()).toPandas().to_dict("records")
+        return {
+            "status": "ok", "tool": "lot_traceability_query",
+            "lots": rows, "count": len(rows),
+            "defective_lots": [r["lot_id"] for r in rows if r.get("is_defective")],
+        }
+    except Exception as e:
+        return {"status": "error", "tool": "lot_traceability_query", "message": str(e), "lots": []}
+
+
+def weekly_defect_trend_query(supplier_ids: list = None, weeks: int = 24) -> dict:
+    """
+    Tool: weekly_defect_trend_query
+    Retrieve rolling weekly defect rates from gold.weekly_defect_trend.
+    Used by Detection Agent and export notebook for Chart 1 (the detection window).
+    """
+    try:
+        df = _spark().table("gold.weekly_defect_trend")
+        if supplier_ids:
+            df = df.filter(F.col("supplier_id").isin(supplier_ids))
+        df = df.orderBy("production_week").limit(weeks * (len(supplier_ids) if supplier_ids else 8))
+        rows = df.toPandas().to_dict("records")
+        # Find the first week the aggregate rate crossed the AI threshold
+        agg = df.groupBy("production_week") \
+                .agg(F.mean("weekly_defect_rate").alias("avg_rate")) \
+                .orderBy("production_week")
+        threshold = 0.038
+        crossed = agg.filter(F.col("avg_rate") >= threshold).limit(1).collect()
+        first_alert_week = crossed[0]["production_week"] if crossed else None
+        return {
+            "status": "ok", "tool": "weekly_defect_trend_query",
+            "trend": rows, "count": len(rows),
+            "ai_threshold": threshold,
+            "first_alert_week": first_alert_week,
+        }
+    except Exception as e:
+        return {"status": "error", "tool": "weekly_defect_trend_query", "message": str(e), "trend": []}
+
+
+def prevention_roi_query(run_id: str = None) -> dict:
+    """
+    Tool: prevention_roi_query
+    Retrieve 6-stage cumulative cost curves from gold.prevention_roi_curves.
+    Used by Scenario Agent and export notebook for Chart 4 (Prevention ROI).
+    """
+    try:
+        df = _spark().table("gold.prevention_roi_curves")
+        if run_id:
+            df = df.filter(F.col("run_id") == run_id)
+        else:
+            # Most recent run
+            latest = df.agg(F.max("run_id").alias("latest")).collect()[0]["latest"]
+            df = df.filter(F.col("run_id") == latest)
+        rows = df.orderBy("stage_sequence").toPandas().to_dict("records")
+        # Compute savings: detect_early vs detect_late at final stage
+        by_scenario = {r["scenario"]: r["cumulative_cost_usd"]
+                       for r in rows if r["stage_sequence"] == max(r2["stage_sequence"] for r2 in rows)}
+        savings = round(by_scenario.get("detect_late", 0) - by_scenario.get("detect_early", 0), 2)
+        return {
+            "status": "ok", "tool": "prevention_roi_query",
+            "curves": rows, "count": len(rows),
+            "savings_vs_status_quo_usd": savings,
+            "final_costs_by_scenario": by_scenario,
+        }
+    except Exception as e:
+        return {"status": "error", "tool": "prevention_roi_query", "message": str(e), "curves": []}

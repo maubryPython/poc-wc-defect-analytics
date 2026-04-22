@@ -2,13 +2,14 @@
 A-03 — Root Cause Analysis (RCA) Agent
 ========================================
 Observe: flagged batch IDs from gold.defect_alerts
-Reason:  select data sources based on defect type (not all queried every run)
-         accumulate evidence → LLM reasoning → ranked hypotheses
-Act:     write to gold.rca_findings
-Escalate: if all hypothesis confidence < 50% → INSUFFICIENT_EVIDENCE (AC-18)
-Auto-trigger: if top confidence > 70% → signal Orchestrator to run Summary Agent (AC-17)
+Reason:  source-selection by defect type → evidence bundle → LLM reasoning → hypotheses
+Act:     write gold.rca_findings (existing) + gold.lot_defect_traceability (NEW)
+Escalate: top confidence < 50% → INSUFFICIENT_EVIDENCE
 
-POC-1: llm_reason calls HuggingFace Inference API
+Prevention story output:
+  gold.lot_defect_traceability → Chart 3 (material lot traceability)
+    - lot_id, supplier_id, mean_defect_rate, batch_count, entered_production_date,
+      hours_to_first_alert, is_defective, defect_root_cause
 """
 
 import uuid
@@ -16,12 +17,13 @@ import json
 from datetime import datetime, timezone
 
 from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
 
 from tools.db_tools import (
-    gold_read, gold_write, escalation_write,
+    gold_read, gold_write, escalation_write, silver_read,
     baseline_lookup, supplier_history_query,
-    material_lot_query, production_conditions_query,
-    qc_query
+    material_lot_query, production_conditions_query, qc_query,
+    lot_traceability_query,
 )
 from tools.llm_tools import llm_reason
 from tools.validation_tools import config_read
@@ -31,24 +33,18 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-# ── Defect-type → data source routing ────────────────────────────────────────
-# AGENTIC (AC-15): agent selects sources based on defect signature
 DEFECT_SOURCE_MAP = {
-    "seam_bulge":           ["production_conditions", "material_lot", "supplier_history"],
-    "heat_transfer_failure":["material_lot", "supplier_history", "production_conditions"],
-    "material_deformation": ["supplier_history", "material_lot"],
-    "minor_thread":         ["production_conditions"],
-    "minor_color_variation":["supplier_history"],
-    "none":                 [],
-    "default":              ["supplier_history", "material_lot"],
+    "seam_bulge":            ["production_conditions","material_lot","supplier_history"],
+    "heat_transfer_failure": ["material_lot","supplier_history","production_conditions"],
+    "material_deformation":  ["supplier_history","material_lot"],
+    "minor_thread":          ["production_conditions"],
+    "minor_color_variation": ["supplier_history"],
+    "none":                  [],
+    "default":               ["supplier_history","material_lot"],
 }
 
 
 def _select_sources(defect_types: list, max_sources: int) -> list:
-    """
-    AGENTIC DECISION: choose which data sources to query based on defect type.
-    Returns an ordered list of source names (capped at max_sources).
-    """
     sources = []
     for dt in defect_types:
         for s in DEFECT_SOURCE_MAP.get(dt, DEFECT_SOURCE_MAP["default"]):
@@ -59,10 +55,8 @@ def _select_sources(defect_types: list, max_sources: int) -> list:
     return sources[:max_sources]
 
 
-def _gather_evidence(batch_id: str, supplier_id: str, line_id: str,
-                     material_lot: str, production_date: str,
-                     sources: list, tools_called: list) -> list:
-    """Query each selected source and return structured evidence bundle."""
+def _gather_evidence(batch_id, supplier_id, line_id, material_lot,
+                     production_date, sources, tools_called) -> list:
     evidence = []
     month = str(production_date)[:7] if production_date else None
 
@@ -72,218 +66,220 @@ def _gather_evidence(batch_id: str, supplier_id: str, line_id: str,
             tools_called.append("supplier_history_query")
             if result["status"] == "ok":
                 months = result["months"]
-                # Summarise trend rather than dumping all rows
                 recent = months[-6:] if len(months) >= 6 else months
                 rates  = [m["defect_rate"] for m in recent]
                 trend  = "increasing" if len(rates) > 1 and rates[-1] > rates[0] else "stable"
                 evidence.append({
                     "source": "supplier_history_query",
-                    "relevance": "high",
-                    "data": {
-                        "supplier_id": supplier_id,
-                        "recent_monthly_rates": rates,
-                        "trend": trend,
-                        "months_on_record": len(months),
-                    },
+                    "supplier_id": supplier_id,
+                    "months_on_record": len(months),
+                    "recent_avg_defect_rate": round(sum(rates)/len(rates), 5) if rates else None,
+                    "trend": trend,
+                    "max_historical_rate": max(rates) if rates else None,
                 })
 
         elif source == "material_lot":
-            result = material_lot_query(material_lot)
+            result = material_lot_query(str(material_lot))
             tools_called.append("material_lot_query")
             if result["status"] == "ok":
-                lot_batches = result["batches"]
                 evidence.append({
                     "source": "material_lot_query",
-                    "relevance": "high",
-                    "data": {
-                        "lot_id": material_lot,
-                        "batches_in_lot": len(lot_batches),
-                        "suppliers_in_lot": list({b["supplier_id"] for b in lot_batches}),
-                        "lines_in_lot":     list({b["line_id"] for b in lot_batches}),
-                    },
+                    "lot_id": material_lot,
+                    "batches_using_lot": len(result["batches"]),
+                    "other_batches": [b["batch_id"] for b in result["batches"]
+                                      if b["batch_id"] \!= batch_id],
                 })
 
         elif source == "production_conditions":
             if month:
                 result = production_conditions_query(line_id, month)
                 tools_called.append("production_conditions_query")
-                if result["status"] == "ok" and result.get("data"):
+                if result["status"] == "ok" and result["data"]:
+                    d = result["data"][0]
                     evidence.append({
                         "source": "production_conditions_query",
-                        "relevance": "medium",
-                        "data": result["data"][0] if result["data"] else {},
+                        "line_id": line_id, "month": month,
+                        "batches_produced": d.get("batches_produced"),
+                        "avg_defects_per_inspection": d.get("avg_defects_per_inspection"),
+                        "fail_inspections": d.get("fail_inspections"),
                     })
-
-    # Always add QC detail for the specific batch
-    qc_result = qc_query(batch_id=batch_id)
-    tools_called.append("qc_query")
-    if qc_result["status"] == "ok":
-        rows = qc_result["rows"]
-        evidence.insert(0, {
-            "source": "qc_query",
-            "relevance": "critical",
-            "data": {
-                "batch_id": batch_id,
-                "inspection_count": len(rows),
-                "fail_count": sum(1 for r in rows if r.get("pass_fail") == "FAIL"),
-                "avg_defect_count": round(
-                    sum(r.get("defect_count", 0) for r in rows) / max(len(rows), 1), 1
-                ),
-                "defect_types_seen": list({r.get("defect_type") for r in rows}),
-            },
-        })
 
     return evidence
 
 
 def run(task_payload: dict) -> dict:
-    """
-    Agent entry point.
-    task_payload = {
-      "run_id": str,
-      "flagged_batch_ids": list[str]
-    }
-    """
     run_id           = task_payload.get("run_id", str(uuid.uuid4()))
     flagged_batch_ids = task_payload.get("flagged_batch_ids", [])
 
     cfg = config_read()["config"].get("rca", {})
-    CONF_THRESHOLD  = cfg.get("confidence_threshold",    0.70)
-    INSUFF_THRESH   = cfg.get("insufficient_threshold",  0.50)
-    MAX_SOURCES     = cfg.get("max_sources_to_query",    3)
-    LLM_MODEL       = cfg.get("llm_model",              "mistralai/Mistral-7B-Instruct-v0.2")
-    LLM_MAX_TOKENS  = cfg.get("llm_max_tokens",         512)
+    CONFIDENCE_THRESHOLD = cfg.get("min_confidence",   0.50)
+    MAX_SOURCES          = cfg.get("max_sources",       3)
+    tools_called         = ["config_read"]
 
-    tools_called = ["config_read"]
+    spark = SparkSession.getActiveSession()
 
-    if not flagged_batch_ids:
-        return {"agent_id": "A-03", "run_id": run_id, "status": "NO_ALERTS",
-                "message": "No flagged batch IDs provided."}
-
-    # ── Load alert records for context ───────────────────────────────────────
-    alerts_result = gold_read("defect_alerts", f"alert_status = 'FLAGGED' AND run_id = '{run_id}'")
-    tools_called.append("gold_read")
-    if alerts_result["status"] != "ok":
+    # ── Read flagged batches from gold.defect_alerts ─────────────────────────
+    alerts_result = gold_read("defect_alerts", "alert_status = 'FLAGGED'")
+    tools_called.append("gold_read:defect_alerts")
+    if alerts_result["status"] \!= "ok":
         return {"agent_id": "A-03", "run_id": run_id, "status": "FAILED",
-                "message": "Could not read defect_alerts"}
+                "message": "Could not read gold.defect_alerts"}
 
     alerts_df = alerts_result["data"].toPandas()
-    alerts_df = alerts_df[alerts_df["batch_id"].isin(flagged_batch_ids)]
+    if flagged_batch_ids:
+        alerts_df = alerts_df[alerts_df["batch_id"].isin(flagged_batch_ids)]
 
-    # Load batch metadata
-    from tools.db_tools import silver_read
-    batch_meta = silver_read("dim_batch")["data"].toPandas()
-    tools_called.append("silver_read")
+    # Also load lot-level defect rates computed by A-02
+    lot_rates_result = gold_read("lot_defect_rates")
+    tools_called.append("gold_read:lot_defect_rates")
+    lot_rates_map = {}
+    if lot_rates_result["status"] == "ok":
+        for r in lot_rates_result["data"].toPandas().to_dict("records"):
+            lot_rates_map[r["lot_id"]] = r
 
-    rca_records = []
-    overall_rca_status = "COMPLETE"
-    max_top_confidence = 0.0
+    # Also load material_lots metadata from Silver
+    lots_meta_result = silver_read("material_lots")
+    tools_called.append("silver_read:material_lots")
+    lots_meta_map = {}
+    if lots_meta_result["status"] == "ok":
+        for r in lots_meta_result["data"].toPandas().to_dict("records"):
+            lots_meta_map[r["lot_id"]] = r
+
+    # ── Per-batch RCA ────────────────────────────────────────────────────────
+    rca_records   = []
+    traceability  = {}  # lot_id → aggregated traceability record
+    escalations   = 0
 
     for _, alert in alerts_df.iterrows():
         batch_id    = alert["batch_id"]
         supplier_id = alert["supplier_id"]
         line_id     = alert["line_id"]
-        batch_tools = list(tools_called)
+        material_lot = alert.get("material_lot", "")
+        production_date = alert.get("production_date", "")
+        batch_tools = []
 
-        meta_row = batch_meta[batch_meta["batch_id"] == batch_id]
-        material_lot   = str(meta_row["material_lot"].values[0]) if len(meta_row) else "UNKNOWN"
-        production_date = str(meta_row["production_date"].values[0]) if len(meta_row) else None
-
-        # Parse defect types from alert
         try:
-            defect_types = json.loads(alert.get("defect_types", "[]"))
-        except (json.JSONDecodeError, TypeError):
-            defect_types = ["default"]
+            defect_types_raw = alert.get("defect_types", "[]")
+            defect_types = json.loads(defect_types_raw) if isinstance(defect_types_raw, str) else defect_types_raw
+        except Exception:
+            defect_types = []
 
-        # ── AGENTIC: select data sources based on defect type (AC-15) ────
+        # AGENTIC: select data sources based on defect type
         sources = _select_sources(defect_types, MAX_SOURCES)
-        batch_tools.append(f"source_selection({sources})")
+        evidence = _gather_evidence(batch_id, supplier_id, line_id,
+                                    material_lot, production_date,
+                                    sources, batch_tools)
+        tools_called.extend(batch_tools)
 
-        # ── Gather evidence from selected sources ─────────────────────────
-        evidence = _gather_evidence(
-            batch_id, supplier_id, line_id,
-            material_lot, production_date, sources, batch_tools
+        # Enrich evidence with lot-level rate
+        lot_rate_info = lot_rates_map.get(material_lot, {})
+        if lot_rate_info:
+            evidence.append({
+                "source": "lot_defect_rates",
+                "lot_id": material_lot,
+                "mean_defect_rate": lot_rate_info.get("mean_defect_rate"),
+                "batch_count_on_lot": lot_rate_info.get("batch_count"),
+                "above_ai_threshold": lot_rate_info.get("above_ai_threshold"),
+            })
+
+        # LLM reasoning
+        rca_result = llm_reason(
+            batch_id=batch_id,
+            supplier_id=supplier_id,
+            defect_types=defect_types,
+            evidence=evidence,
+            anomaly_score=float(alert.get("anomaly_score", 0) or 0),
         )
+        tools_called.append("llm_reason")
 
-        # ── Tool: llm_reason (AC-16) ─────────────────────────────────────
-        llm_result = llm_reason(evidence, model=LLM_MODEL, max_tokens=LLM_MAX_TOKENS)
-        batch_tools.append("llm_reason")
+        hypotheses    = rca_result.get("hypotheses", [])
+        top           = hypotheses[0] if hypotheses else {}
+        top_conf      = float(top.get("confidence_score", 0))
+        top_hypothesis = top.get("hypothesis", "")
+        rca_status    = "COMPLETE" if top_conf >= CONFIDENCE_THRESHOLD else "COMPLETE_LOW_CONFIDENCE"
 
-        hypotheses         = llm_result.get("hypotheses", [])
-        overall_confidence = llm_result.get("overall_confidence", 0.0)
-        data_gaps          = llm_result.get("data_gaps", [])
-
-        # ── AGENTIC: Confidence gating (AC-17, AC-18) ────────────────────
-        if not hypotheses or overall_confidence < INSUFF_THRESH:
-            rca_status = "INSUFFICIENT_EVIDENCE"
-            overall_rca_status = "ESCALATED"
-
+        if top_conf < CONFIDENCE_THRESHOLD:
             escalation_write(
                 agent_id="A-03", run_id=run_id,
-                question=(
-                    f"RCA for batch {batch_id} (supplier {supplier_id}) produced no hypothesis "
-                    f"above the confidence threshold ({INSUFF_THRESH:.0%}). "
-                    f"Confidence achieved: {overall_confidence:.0%}. "
-                    f"Data gaps identified: {data_gaps}. "
-                    f"Recommended: collect additional QC records for this supplier's L2/L3 lines."
-                ),
-                context={
-                    "batch_id": batch_id, "supplier_id": supplier_id,
-                    "hypotheses_attempted": len(hypotheses),
-                    "confidence_scores": [h.get("confidence_score") for h in hypotheses],
-                    "data_gaps": data_gaps,
-                    "evidence_sources_queried": sources,
-                },
+                question=(f"RCA for batch {batch_id} has low confidence ({top_conf:.0%}). "
+                          f"Manual review required."),
+                context={"batch_id": batch_id, "supplier_id": supplier_id,
+                         "top_confidence": top_conf, "hypotheses": hypotheses},
                 recovery_attempted=True,
             )
             batch_tools.append("escalate_to_human")
+            tools_called.append("escalate_to_human")
+            escalations += 1
 
-        elif overall_confidence >= CONF_THRESHOLD:
-            # High confidence → Summary Agent can auto-trigger (AC-17)
-            rca_status = "COMPLETE"
-            max_top_confidence = max(max_top_confidence, overall_confidence)
-        else:
-            rca_status = "COMPLETE_LOW_CONFIDENCE"
-            max_top_confidence = max(max_top_confidence, overall_confidence)
+        # Build RCA record
+        rca_records.append({
+            "batch_id":         batch_id,
+            "supplier_id":      supplier_id,
+            "line_id":          line_id,
+            "material_lot":     material_lot,
+            "rca_status":       rca_status,
+            "top_hypothesis":   top_hypothesis,
+            "top_confidence":   round(top_conf, 4),
+            "overall_confidence": round(
+                sum(h.get("confidence_score",0) for h in hypotheses) / max(len(hypotheses),1), 4
+            ),
+            "hypotheses_json":  json.dumps(hypotheses),
+            "evidence_sources": json.dumps(sources),
+            "data_gaps":        json.dumps(rca_result.get("data_gaps", [])),
+            "confidence_tier":  "HIGH" if top_conf >= 0.75 else "MEDIUM" if top_conf >= 0.60 else "LOW",
+            "model_used":       rca_result.get("model_used", "claude-sonnet-4-6"),
+            "tools_called":     json.dumps(batch_tools),
+            "run_id":           run_id,
+            "analyzed_at":      _now(),
+        })
 
-        # Write findings to Gold
-        top = hypotheses[0] if hypotheses else {}
-        record = {
-            "batch_id":              batch_id,
-            "supplier_id":           supplier_id,
-            "line_id":               line_id,
-            "rca_status":            rca_status,
-            "top_hypothesis":        top.get("hypothesis", ""),
-            "top_confidence":        float(top.get("confidence_score", 0.0)),
-            "overall_confidence":    float(overall_confidence),
-            "hypotheses_json":       json.dumps(hypotheses),
-            "evidence_sources":      json.dumps(sources),
-            "data_gaps":             json.dumps(data_gaps),
-            "tools_called":          json.dumps(batch_tools),
-            "run_id":                run_id,
-            "analyzed_at":           _now(),
-        }
-        rca_records.append(record)
+        # ── Build lot traceability record ──────────────────────────────────
+        if material_lot and material_lot not in traceability:
+            lot_meta = lots_meta_map.get(material_lot, {})
+            traceability[material_lot] = {
+                "lot_id":                  material_lot,
+                "supplier_id":             supplier_id,
+                "material_type":           lot_meta.get("material_type", ""),
+                "entered_production_date": lot_meta.get("entered_production_date", ""),
+                "is_defective":            lot_meta.get("is_defective", False),
+                "defect_root_cause":       lot_meta.get("defect_root_cause") or top_hypothesis,
+                "hours_to_first_alert":    lot_meta.get("hours_to_first_alert"),
+                "mean_defect_rate":        lot_rate_info.get("mean_defect_rate", float(alert.get("observed_defect_rate",0))),
+                "batch_count":             lot_rate_info.get("batch_count", 1),
+                "batches_flagged":         1,
+                "rca_top_confidence":      round(top_conf, 4),
+                "rca_status":              rca_status,
+                "run_id":                  run_id,
+                "traced_at":               _now(),
+            }
+        elif material_lot in traceability:
+            traceability[material_lot]["batches_flagged"] += 1
 
-    # ── Write all RCA records ─────────────────────────────────────────────────
+    # ── Write gold.rca_findings ──────────────────────────────────────────────
     if rca_records:
-        spark = SparkSession.getActiveSession()
         rca_df = spark.createDataFrame(rca_records)
         gold_write(rca_df, "rca_findings", run_id)
-        tools_called.append("gold_write")
+        tools_called.append("gold_write:rca_findings")
 
-    complete_count = sum(1 for r in rca_records if "COMPLETE" in r["rca_status"])
-    escalated_count = sum(1 for r in rca_records if r["rca_status"] == "INSUFFICIENT_EVIDENCE")
+    # ── Write gold.lot_defect_traceability (NEW — Chart 3) ──────────────────
+    if traceability:
+        lot_df = spark.createDataFrame(list(traceability.values()))
+        gold_write(lot_df, "lot_defect_traceability", run_id, mode="overwrite")
+        tools_called.append("gold_write:lot_defect_traceability")
+
+    complete = sum(1 for r in rca_records if r["rca_status"] == "COMPLETE")
+    top_conf_max = max((r["top_confidence"] for r in rca_records), default=0)
 
     return {
-        "agent_id":          "A-03",
-        "run_id":            run_id,
-        "status":            overall_rca_status,
-        "batches_analyzed":  len(rca_records),
-        "complete":          complete_count,
-        "escalated":         escalated_count,
-        "max_top_confidence": round(max_top_confidence, 3),
-        # AC-17: signal for Orchestrator → trigger Summary Agent if confidence is high enough
-        "trigger_summary":   max_top_confidence >= CONF_THRESHOLD,
-        "tools_called":      list(dict.fromkeys(tools_called)),
+        "agent_id":           "A-03",
+        "run_id":             run_id,
+        "status":             "COMPLETE" if escalations == 0 else "PARTIAL",
+        "batches_investigated": len(rca_records),
+        "rca_complete":       complete,
+        "rca_low_confidence": len(rca_records) - complete,
+        "escalations":        escalations,
+        "lots_traced":        len(traceability),
+        "max_top_confidence": round(top_conf_max, 4),
+        "rca_status":         "COMPLETE" if top_conf_max >= 0.5 else "INSUFFICIENT_EVIDENCE",
+        "tools_called":       list(dict.fromkeys(tools_called)),
     }

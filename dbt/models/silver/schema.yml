@@ -133,3 +133,23 @@ models:
         description: Rolling 3-month average — smoothed baseline for anomaly detection
         tests:
           - not_null
+
+  - name: supplier_risk_scores
+    description: "Pre-production supplier risk assessment — 5 dimensions + composite score. Drives Chart 2."
+    columns:
+      - name: supplier_id
+        tests: [not_null, unique]
+      - name: composite_risk_score
+        tests: [not_null]
+      - name: risk_tier
+        tests:
+          - accepted_values:
+              values: ['HIGH', 'ELEVATED', 'NORMAL']
+
+  - name: material_lots
+    description: "Material lot metadata with defect status and hours-to-alert. Drives Chart 3."
+    columns:
+      - name: lot_id
+        tests: [not_null, unique]
+      - name: supplier_id
+        tests: [not_null]

@@ -118,3 +118,29 @@ models:
         tests:
           - accepted_values:
               values: ['COMPLETE', 'PARTIAL', 'FAILED']
+
+  - name: weekly_defect_trend
+    description: "Rolling weekly defect rate per supplier — Detection Window (Chart 1)."
+    columns:
+      - name: production_week
+        tests: [not_null]
+      - name: weekly_defect_rate
+        tests: [not_null]
+
+  - name: lot_defect_traceability
+    description: "Lot-level defect rates + detection timing — Lot Traceability (Chart 3)."
+    columns:
+      - name: lot_id
+        tests: [not_null]
+      - name: mean_defect_rate
+        tests: [not_null]
+
+  - name: prevention_roi_curves
+    description: "6-stage cumulative cost curves for 3 scenarios — Prevention ROI (Chart 4)."
+    columns:
+      - name: scenario
+        tests:
+          - accepted_values:
+              values: ['detect_early', 'detect_late', 'do_nothing', 'ai_investment']
+      - name: stage_sequence
+        tests: [not_null]

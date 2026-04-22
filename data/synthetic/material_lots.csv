@@ -1,0 +1,28 @@
+lot_id,supplier_id,material_type,entered_production_date,first_batch_production_date,adhesive_batch_id,batch_count,total_units,is_defective,defect_root_cause,hours_to_first_alert,detected_by_agent,detection_method
+LOT-S007-202602-02,S007,bonded_seam_tape,2026-01-31T06:00:00Z,2026-02-04,ADH-2025-Q4-0317,3,3819,True,Bonded-seam tape adhesive delaminating under heat/tension — lot-level quality failure,71.0,True,A-02 lot-level Z-score threshold
+LOT-S007-202601-02,S007,bonded_seam_tape,2026-01-09T06:00:00Z,2026-01-15,STD-02601-02,2,3332,False,,,False,N/A
+LOT-S008-202603-01,S008,heat_transfer_film,2026-02-24T06:00:00Z,2026-03-02,STD-02603-01,3,3626,False,,,False,N/A
+LOT-S008-202602-02,S008,heat_transfer_film,2026-02-17T06:00:00Z,2026-02-23,STD-02602-02,1,999,False,,,False,N/A
+LOT-S007-202601-05,S007,bonded_seam_tape,2026-01-10T06:00:00Z,2026-01-16,STD-02601-05,2,1901,False,,,False,N/A
+LOT-S008-202603-04,S008,heat_transfer_film,2026-03-10T06:00:00Z,2026-03-16,STD-02603-04,2,2152,False,,,False,N/A
+LOT-S008-202603-02,S008,heat_transfer_film,2026-03-02T06:00:00Z,2026-03-08,STD-02603-02,2,1686,False,,,False,N/A
+LOT-S007-202602-05,S007,bonded_seam_tape,2026-01-27T06:00:00Z,2026-02-02,STD-02602-05,4,4981,False,,,False,N/A
+LOT-S007-202602-04,S007,bonded_seam_tape,2026-01-28T06:00:00Z,2026-02-03,STD-02602-04,2,2084,False,,,False,N/A
+LOT-S007-202602-03,S007,bonded_seam_tape,2026-02-08T06:00:00Z,2026-02-14,STD-02602-03,2,3225,False,,,False,N/A
+LOT-S007-202603-02,S007,bonded_seam_tape,2026-03-13T06:00:00Z,2026-03-19,STD-02603-02,1,1964,False,,,False,N/A
+LOT-S007-202603-04,S007,bonded_seam_tape,2026-02-27T06:00:00Z,2026-03-05,STD-02603-04,1,558,False,,,False,N/A
+LOT-S008-202601-03,S008,heat_transfer_film,2026-01-12T06:00:00Z,2026-01-14,FILM-2025-Q4-0089,4,4856,True,Heat-transfer film applied outside spec temp/pressure parameters — equipment calibration drift on L2/L3,74.0,True,A-02 lot-level Z-score threshold
+LOT-S008-202602-05,S008,heat_transfer_film,2026-01-26T06:00:00Z,2026-02-01,STD-02602-05,4,5773,False,,,False,N/A
+LOT-S008-202602-01,S008,heat_transfer_film,2026-02-08T06:00:00Z,2026-02-14,STD-02602-01,2,3445,False,,,False,N/A
+LOT-S007-202603-05,S007,bonded_seam_tape,2026-03-11T06:00:00Z,2026-03-17,STD-02603-05,2,2680,False,,,False,N/A
+LOT-S008-202603-05,S008,heat_transfer_film,2026-02-28T06:00:00Z,2026-03-06,STD-02603-05,2,1842,False,,,False,N/A
+LOT-S008-202603-03,S008,heat_transfer_film,2026-02-27T06:00:00Z,2026-03-05,STD-02603-03,3,3862,False,,,False,N/A
+LOT-S008-202602-04,S008,heat_transfer_film,2026-01-31T06:00:00Z,2026-02-06,STD-02602-04,2,1906,False,,,False,N/A
+LOT-S008-202601-04,S008,heat_transfer_film,2026-01-11T06:00:00Z,2026-01-17,STD-02601-04,1,1577,False,,,False,N/A
+LOT-S007-202601-04,S007,bonded_seam_tape,2026-01-05T06:00:00Z,2026-01-21,ADH-2025-Q4-0317,2,1283,True,Bonded-seam tape adhesive delaminating under heat/tension — lot-level quality failure,68.0,True,A-02 lot-level Z-score threshold
+LOT-S007-202603-03,S007,bonded_seam_tape,2026-03-18T06:00:00Z,2026-03-24,STD-02603-03,1,567,False,,,False,N/A
+LOT-S008-202601-02,S008,heat_transfer_film,2026-01-14T06:00:00Z,2026-01-20,STD-02601-02,1,1857,False,,,False,N/A
+LOT-S007-202603-01,S007,bonded_seam_tape,2026-03-01T06:00:00Z,2026-03-07,STD-02603-01,1,1905,False,,,False,N/A
+LOT-S008-202601-01,S008,heat_transfer_film,2026-01-06T06:00:00Z,2026-01-12,STD-02601-01,2,1889,False,,,False,N/A
+LOT-S007-202601-01,S007,bonded_seam_tape,2026-01-08T06:00:00Z,2026-01-14,STD-02601-01,1,1393,False,,,False,N/A
+LOT-S007-202602-01,S007,bonded_seam_tape,2026-01-30T06:00:00Z,2026-02-05,STD-02602-01,1,1573,False,,,False,N/A

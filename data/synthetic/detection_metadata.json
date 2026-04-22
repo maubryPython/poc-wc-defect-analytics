@@ -1,0 +1,7 @@
+{
+  "ai_alert_threshold": 0.038,
+  "ai_alert_week": "2026-W04",
+  "actual_discovery_date": "2026-04-08",
+  "weeks_gap": 10,
+  "cost_of_gap_usd": 1200000
+}
