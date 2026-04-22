@@ -10,6 +10,10 @@ import sys, os
 sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
 
 # COMMAND ----------
+
+%pip install langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv openpyxl scikit-learn --quiet
+
+# COMMAND ----------
 # MAGIC %md ## Run the agent
 
 # COMMAND ----------
@@ -18,7 +22,8 @@ import uuid
 from agents.ingestion_agent import run
 
 # List files in landing zone
-files = [f.path for f in dbutils.fs.ls("dbfs:/mnt/landing/")]
+raw_files = [f.path for f in dbutils.fs.ls("/Volumes/workspace/default/landing/")]
+files = [p.replace("dbfs:", "") for p in raw_files]
 print(f"Files found: {files}")
 
 result = run({

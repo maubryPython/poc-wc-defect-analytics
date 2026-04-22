@@ -11,6 +11,10 @@ sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analyti
 
 # COMMAND ----------
 
+%pip install langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv scikit-learn --quiet
+
+# COMMAND ----------
+
 import uuid, json
 from agents.detection_agent import run
 
