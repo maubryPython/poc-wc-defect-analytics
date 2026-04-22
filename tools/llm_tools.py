@@ -11,16 +11,18 @@ All tools return a dict with at minimum:
 import os
 import re
 import json
-import anthropic
+import requests
 from typing import Any
 
 
 # ── Anthropic config ──────────────────────────────────────────────────────────
 DEFAULT_MODEL = "claude-sonnet-4-6"
+ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_VERSION = "2023-06-01"
 
 
-def _get_client() -> anthropic.Anthropic:
-    """Create Anthropic client from env or Databricks secrets."""
+def _get_api_key() -> str:
+    """Retrieve Anthropic API key from env or Databricks secrets."""
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not api_key:
         try:
@@ -30,20 +32,30 @@ def _get_client() -> anthropic.Anthropic:
             api_key = dbutils.secrets.get(scope="nike-wc-poc", key="anthropic_api_key")
         except Exception:
             pass
-    return anthropic.Anthropic(api_key=api_key)
+    return api_key
 
 
 def _claude_call(prompt: str, system: str, model: str = DEFAULT_MODEL,
                  max_tokens: int = 1024) -> str:
-    """Call Claude API. Returns generated text string."""
-    client = _get_client()
-    response = client.messages.create(
-        model=model,
-        max_tokens=max_tokens,
-        system=system,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return response.content[0].text.strip()
+    """
+    Call Anthropic Claude API via raw HTTP (requests only — no anthropic package).
+    Returns generated text string.
+    """
+    api_key = _get_api_key()
+    headers = {
+        "x-api-key": api_key,
+        "anthropic-version": ANTHROPIC_VERSION,
+        "content-type": "application/json",
+    }
+    payload = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "system": system,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+    resp = requests.post(ANTHROPIC_API_URL, headers=headers, json=payload, timeout=60)
+    resp.raise_for_status()
+    return resp.json()["content"][0]["text"].strip()
 
 
 # ── RCA Prompts ───────────────────────────────────────────────────────────────

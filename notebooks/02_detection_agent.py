@@ -6,7 +6,7 @@
 
 # COMMAND ----------
 
-%pip install anthropic pyyaml python-dotenv scikit-learn --quiet
+%pip install pyyaml python-dotenv scikit-learn --quiet
 
 # COMMAND ----------
 

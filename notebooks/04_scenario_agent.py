@@ -10,7 +10,7 @@
 
 # COMMAND ----------
 
-%pip install anthropic pyyaml python-dotenv --quiet
+%pip install pyyaml python-dotenv --quiet
 
 # COMMAND ----------
 

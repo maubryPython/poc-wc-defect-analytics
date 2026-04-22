@@ -5,7 +5,7 @@
 
 # COMMAND ----------
 
-%pip install anthropic pyyaml python-dotenv openpyxl scikit-learn --quiet
+%pip install pyyaml python-dotenv openpyxl scikit-learn --quiet
 
 # COMMAND ----------
 
