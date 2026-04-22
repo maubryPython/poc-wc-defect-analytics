@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "2"
+# ///
 # MAGIC %md
 # MAGIC # 04 — Scenario Modeling Agent (A-04)
 # MAGIC Monte Carlo projections for 3 response strategies.
@@ -20,6 +24,7 @@ print(json.dumps({k: v for k, v in result.items() if k != "tools_called"}, inden
 print(f"\nTools called: {result['tools_called']}")
 
 # COMMAND ----------
+
 # MAGIC %md ## Scenario comparison — cost and timeline (AC-09, AC-23)
 
 # COMMAND ----------
@@ -37,6 +42,7 @@ spark.sql("""
 """).display()
 
 # COMMAND ----------
+
 # MAGIC %md ## POC-3: Pre-compute parameter variants for Tableau sliders
 
 # COMMAND ----------
@@ -44,34 +50,25 @@ spark.sql("""
 # MAGIC %md
 # MAGIC Pre-compute scenarios across a range of return_rate assumptions
 # MAGIC so Tableau Public can switch between them with parameter actions.
-
-from agents.scenario_agent import run as run_scenario
-
-variants = []
-for return_rate_mult in [0.7, 0.85, 1.0, 1.15, 1.30]:
-    r = run_scenario({
-        "run_id": f"variant_{return_rate_mult}",
-        "param_overrides": {
-            "do_nothing":         {"return_rate_multiplier": return_rate_mult},
-            "partial_remediation":{"return_rate_multiplier": return_rate_mult},
-            "full_recall":        {"return_rate_multiplier": return_rate_mult},
-        }
-    })
-    variants.append({"return_rate_assumption": return_rate_mult, **r})
-
-import pandas as pd
-pd.DataFrame(variants)[["return_rate_assumption", "recommended_scenario",
-                          "recommended_cost_usd", "recommended_timeline_days"]].display()
+# MAGIC
+# MAGIC from agents.scenario_agent import run as run_scenario
+# MAGIC
+# MAGIC variants = []
+# MAGIC for return_rate_mult in [0.7, 0.85, 1.0, 1.15, 1.30]:
+# MAGIC     r = run_scenario({
+# MAGIC         "run_id": f"variant_{return_rate_mult}",
+# MAGIC         "param_overrides": {
+# MAGIC             "do_nothing":         {"return_rate_multiplier": return_rate_mult},
+# MAGIC             "partial_remediation":{"return_rate_multiplier": return_rate_mult},
+# MAGIC             "full_recall":        {"return_rate_multiplier": return_rate_mult},
+# MAGIC         }
+# MAGIC     })
+# MAGIC     variants.append({"return_rate_assumption": return_rate_mult, **r})
+# MAGIC
+# MAGIC import pandas as pd
+# MAGIC pd.DataFrame(variants)[["return_rate_assumption", "recommended_scenario",
+# MAGIC                           "recommended_cost_usd", "recommended_timeline_days"]].display()
 
 # COMMAND ----------
+
 # MAGIC %md ## Sensitivity analysis
-
-# COMMAND ----------
-
-spark.sql("""
-  SELECT DISTINCT most_sensitive_param,
-         sensitivity_rank,
-         confidence_flag
-  FROM gold.scenario_projections
-  LIMIT 3
-""").display()
