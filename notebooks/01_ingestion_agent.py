@@ -2,16 +2,15 @@
 # MAGIC %md
 # MAGIC # 01 — Ingestion & Validation Agent (A-01)
 # MAGIC Ingests raw CSV/Excel files from the landing zone into Silver Delta tables.
-# MAGIC Run after uploading files to `/dbfs/mnt/landing/`.
+
+# COMMAND ----------
+
+%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv openpyxl scikit-learn --quiet
 
 # COMMAND ----------
 
 import sys, os
 sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
-
-# COMMAND ----------
-
-%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv openpyxl scikit-learn --quiet
 
 # COMMAND ----------
 # MAGIC %md ## Run the agent
@@ -21,7 +20,6 @@ sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analyti
 import uuid
 from agents.ingestion_agent import run
 
-# List files in landing zone
 raw_files = [f.path for f in dbutils.fs.ls("/Volumes/workspace/default/landing/")]
 files = [p.replace("dbfs:", "") for p in raw_files]
 print(f"Files found: {files}")

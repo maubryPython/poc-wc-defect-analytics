@@ -6,12 +6,12 @@
 
 # COMMAND ----------
 
-import sys, os
-sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
+%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv scikit-learn --quiet
 
 # COMMAND ----------
 
-%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv scikit-learn --quiet
+import sys, os
+sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
 
 # COMMAND ----------
 
