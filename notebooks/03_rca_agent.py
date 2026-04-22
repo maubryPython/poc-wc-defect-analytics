@@ -13,7 +13,7 @@ os.environ["HF_API_TOKEN"] = dbutils.secrets.get(scope="nike-wc-poc", key="hf_ap
 
 # COMMAND ----------
 
-%pip install langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv --quiet
+%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv --quiet
 
 # COMMAND ----------
 

@@ -15,7 +15,7 @@ sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analyti
 
 # COMMAND ----------
 
-%pip install langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv --quiet
+%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv --quiet
 
 # COMMAND ----------
 
