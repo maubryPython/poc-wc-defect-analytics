@@ -8,8 +8,7 @@
 
 import sys, os
 sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
-import os
-os.environ["ANTHROPIC_API_KEY"] = "<PASTE_YOUR_ANTHROPIC_API_KEY_HERE>"
+%run ./00_env
 
 # COMMAND ----------
 

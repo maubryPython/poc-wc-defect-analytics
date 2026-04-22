@@ -1,6 +1,7 @@
 # Environment & secrets
 .env
 *.env
+notebooks/00_env.py
 
 # Python
 __pycache__/
