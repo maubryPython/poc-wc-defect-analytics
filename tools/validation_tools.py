@@ -31,7 +31,8 @@ def config_read(path: str = None) -> dict:
 
 # ── Schema definitions ────────────────────────────────────────────────────────
 SCHEMAS = {
-    "manufacturing_batches": {
+    # Keys match the Silver table names passed by the Ingestion Agent
+    "dim_batch": {
         "required_cols": [
             "batch_id", "supplier_id", "production_date",
             "line_id", "unit_count", "material_lot", "material_type", "sku"
@@ -43,7 +44,7 @@ SCHEMAS = {
         },
         "not_null": ["batch_id", "supplier_id", "production_date", "line_id", "unit_count"],
     },
-    "qc_inspection_logs": {
+    "fact_qc_inspections": {
         "required_cols": [
             "inspection_id", "batch_id", "supplier_id", "line_id",
             "inspection_date", "inspector_id", "units_inspected",
@@ -55,7 +56,7 @@ SCHEMAS = {
         },
         "not_null": ["inspection_id", "batch_id", "defect_count", "units_inspected"],
     },
-    "supplier_manifest": {
+    "dim_supplier": {
         "required_cols": [
             "supplier_id", "supplier_name", "region",
             "material_type", "contract_tier", "baseline_defect_rate"
@@ -63,7 +64,7 @@ SCHEMAS = {
         "types": {"baseline_defect_rate": float},
         "not_null": ["supplier_id", "supplier_name"],
     },
-    "sales_returns": {
+    "fact_sales_returns": {
         "required_cols": [
             "transaction_id", "date", "sku", "channel",
             "units_sold", "units_returned", "return_rate",

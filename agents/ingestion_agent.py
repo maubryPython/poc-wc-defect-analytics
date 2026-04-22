@@ -99,7 +99,7 @@ def run(task_payload: dict) -> dict:
         tools_called.append("schema_validate")
 
         # File-level quarantine if too many invalid rows
-        if sv["failure_rate"] >= threshold:
+        if sv.get("failure_rate", 0.0) >= threshold:
             qw = quarantine_write(
                 _spark_from_pandas(df), filepath,
                 f"FILE_QUARANTINED: {sv['failure_rate']:.1%} rows failed schema validation",
