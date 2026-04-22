@@ -58,25 +58,37 @@ def make_suppliers():
 
 
 # ── 2. SUPPLIER DEFECT HISTORY (monthly, Jan 2025 – Mar 2026) ────────────────
+# Calibrated to match QC inspection scale: normal observed rates ~0.03–0.06
+# S007/S008 show a creeping trend on L2/L3 from Dec 2025 (up to ~0.09)
+# so the Detection Agent's Z-score is meaningful at the right scale.
+HISTORY_BASE = {
+    "S001": 0.034, "S002": 0.040, "S003": 0.045,
+    "S004": 0.038, "S005": 0.033, "S006": 0.044,
+    "S007": 0.038, "S008": 0.041,
+}
+
 def make_supplier_history(suppliers):
     months = pd.date_range("2025-01-01", "2026-03-01", freq="MS")
     rows = []
     for _, sup in suppliers.iterrows():
-        base = sup["baseline_defect_rate"]
+        sid  = sup["supplier_id"]
+        base = HISTORY_BASE.get(sid, 0.040)
         for m in months:
             for line in LINES:
                 # S007 and S008 show a creeping trend on L2/L3 from Dec 2025
-                if sup["supplier_id"] in ("S007", "S008") and m >= pd.Timestamp("2025-12-01"):
+                if sid in ("S007", "S008") and m >= pd.Timestamp("2025-12-01"):
                     if line in ("L2", "L3"):
-                        rate = base * np.random.uniform(1.8, 3.2)
+                        # Elevated but not at the defective-batch scale — that's
+                        # the point of anomaly detection: current QC >> history
+                        rate = base * np.random.uniform(1.5, 2.4)
                     else:
-                        rate = base * np.random.uniform(0.9, 1.3)
+                        rate = base * np.random.uniform(0.9, 1.2)
                 else:
-                    rate = base * np.random.uniform(0.7, 1.4)
-                rate = round(min(rate, 0.15), 5)
+                    rate = base * np.random.uniform(0.8, 1.3)
+                rate = round(min(rate, 0.12), 5)
                 inspected = random.randint(400, 1200)
                 rows.append({
-                    "supplier_id":    sup["supplier_id"],
+                    "supplier_id":    sid,
                     "line_id":        line,
                     "month":          m.strftime("%Y-%m"),
                     "units_inspected": inspected,
@@ -149,14 +161,20 @@ def make_qc_inspections(batches):
         n_inspections = random.randint(1, 3)
         for _ in range(n_inspections):
             is_def = batch["is_defective"]
+            units_inspected = min(batch["unit_count"], random.randint(80, 200))
+
             if is_def:
-                defect_count = random.randint(45, 180)
+                # Defective batches: 40–85% defect rate — clearly anomalous (Z >> 10)
+                defect_rate  = random.uniform(0.40, 0.85)
+                defect_count = int(units_inspected * defect_rate)
                 defect_type  = random.choice(defect_types_defective)
                 pass_fail    = "FAIL"
             else:
-                defect_count = random.randint(0, 12)
+                # Normal batches: 2–5% defect rate — stays within 2 SD of history baseline
+                defect_rate  = random.uniform(0.020, 0.050)
+                defect_count = int(units_inspected * defect_rate)
                 defect_type  = random.choice(defect_types_normal)
-                pass_fail    = "PASS" if defect_count < 10 else "REVIEW"
+                pass_fail    = "PASS" if defect_rate < 0.042 else "REVIEW"
 
             # Inspection date: 1–5 days after production
             prod_date   = date.fromisoformat(batch["production_date"])
@@ -168,7 +186,7 @@ def make_qc_inspections(batches):
                 "line_id":        batch["line_id"],
                 "inspection_date": insp_date.isoformat(),
                 "inspector_id":   random.choice(inspectors),
-                "units_inspected": min(batch["unit_count"], random.randint(80, 200)),
+                "units_inspected": units_inspected,
                 "defect_count":   defect_count,
                 "defect_type":    defect_type,
                 "pass_fail":      pass_fail,

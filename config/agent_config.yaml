@@ -5,8 +5,8 @@
 
 detection:
   # Anomaly score thresholds (Z-score multiples above supplier baseline)
-  flag_threshold: 2.0          # Defect rate > this SD above baseline → FLAGGED
-  borderline_low: 1.5          # Between borderline_low and flag_threshold → run secondary lookup
+  flag_threshold: 2.5          # Defect rate > this SD above baseline → FLAGGED
+  borderline_low: 1.8          # Between borderline_low and flag_threshold → run secondary lookup
   min_units_inspected: 50      # Ignore inspections with fewer units than this
   methods:                     # Detection methods to run (both used; higher score wins)
     - zscore
