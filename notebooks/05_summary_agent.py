@@ -7,7 +7,7 @@
 # COMMAND ----------
 
 import sys, os
-sys.path.insert(0, "/Workspace/Repos/<your-repo>/nike-wc-defect-analytics")
+sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
 os.environ["HF_API_TOKEN"] = dbutils.secrets.get(scope="nike-wc-poc", key="hf_api_token")
 
 # COMMAND ----------
@@ -55,7 +55,7 @@ if briefing_row:
 
 # COMMAND ----------
 
-export_path = "/Workspace/Repos/<your-repo>/nike-wc-defect-analytics/dashboard/exports/"
+export_path = "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics/dashboard/exports/"
 for f in dbutils.fs.ls(export_path):
     print(f.name, f.size)
 

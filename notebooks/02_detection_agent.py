@@ -7,7 +7,7 @@
 # COMMAND ----------
 
 import sys, os
-sys.path.insert(0, "/Workspace/Repos/<your-repo>/nike-wc-defect-analytics")
+sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
 
 # COMMAND ----------
 
