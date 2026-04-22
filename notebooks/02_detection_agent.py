@@ -6,7 +6,7 @@
 
 # COMMAND ----------
 
-%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv scikit-learn --quiet
+%pip install anthropic pyyaml python-dotenv scikit-learn --quiet
 
 # COMMAND ----------
 
