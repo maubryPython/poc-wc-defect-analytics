@@ -16,15 +16,15 @@ rca:
   confidence_threshold: 0.70   # RCA top hypothesis must exceed this to auto-trigger Summary Agent
   insufficient_threshold: 0.50 # All hypotheses below this → INSUFFICIENT_EVIDENCE + escalate
   max_sources_to_query: 3      # Max data sources agent queries per investigation
-  llm_model: "mistralai/Mistral-7B-Instruct-v0.2"   # HuggingFace model ID
-  llm_max_tokens: 512
+  llm_model: "claude-sonnet-4-6"
+  llm_max_tokens: 1024
 
 summary:
   severity_unit_threshold: 5000   # Units flagged above this → proactive briefing triggered
   severity_rate_threshold: 0.03   # OR defect rate above this → proactive briefing triggered
   max_briefing_words: 300
-  llm_model: "mistralai/Mistral-7B-Instruct-v0.2"
-  llm_max_tokens: 768
+  llm_model: "claude-sonnet-4-6"
+  llm_max_tokens: 1024
 
 scenario:
   n_simulations: 1000          # Monte Carlo iterations

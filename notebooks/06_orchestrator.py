@@ -8,11 +8,12 @@
 
 import sys, os
 sys.path.insert(0, "/Workspace/Repos/maubrymusic@gmail.com/poc-wc-defect-analytics")
-os.environ["HF_API_TOKEN"] = dbutils.secrets.get(scope="nike-wc-poc", key="hf_api_token")
+import os
+os.environ["ANTHROPIC_API_KEY"] = "<PASTE_YOUR_ANTHROPIC_API_KEY_HERE>"
 
 # COMMAND ----------
 
-%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community huggingface-hub pyyaml python-dotenv scikit-learn --quiet
+%pip install "typing_extensions>=4.9.0" langgraph langchain langchain-community anthropic pyyaml python-dotenv scikit-learn --quiet
 
 # COMMAND ----------
 # MAGIC %md ## Run the pipeline
